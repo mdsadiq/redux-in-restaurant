@@ -7,7 +7,7 @@ class Dish extends React.Component {
     this.props.addToOrder(this.props.index);
   } */
   render() {
-
+    console.log(this.props)
   // const image = this.props.details.image;
   // const name =this.props.details.name;
 
@@ -16,7 +16,7 @@ class Dish extends React.Component {
   const isAvailable = status === 'available';
     return (
       <li className="menu-dish">
-        <img src={image} alt={name}/>
+        <img src={image} alt={name} height={90} width={150} />
         <h3 className="dish-name">
           {name}
           <span className="price">{formatPrice(price)}</span>

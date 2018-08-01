@@ -1,11 +1,12 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import AddDishForm from './AddDishForm';
 import EditDishForm from './EditDishForm';
 import sampleDishes from '../sample-dishes'
 import { Link, Route, Switch } from 'react-router-dom';
 import {connect} from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { bulkUpload } from '../actions/inventory'
+import { bulkUpload, addItem } from '../actions/inventory'
 import InventoryAnalytics from './Analytics';
 
 
@@ -23,14 +24,25 @@ class Inventory extends React.Component {
     this.setState({dishes: nextProps.inventory})
   }
 
-  addDish = dish =>{
+  addDish = dishRef =>{
 
     // 1. Take a copy of the existing state
-    const dishes = {...this.state.dishes};
+    // const dishes = {...this.state.dishes};
     // 2. add new dish to dishes variable
-    dishes[`dish${Date.now()}`] = dish;
+    // dishes[`dish${Date.now()}`] = dish;
      // 3. set the new dishes object to state
-     this.setState({ dishes });
+    //  this.props.addItem({ dishes });
+    const dishData = {
+      name: dishRef.nameRef,
+      image: dishRef.imageRef,
+      desc: dishRef.descRef,
+      status: dishRef.statusRef,
+      price: dishRef.priceRef
+    }
+   const id = `dish${Date.now()}`
+    const dish = { [id] : dishData }
+    console.log(dish)
+     this.props.addItem(dish);
   }
 
   updateDish=(key, updatedDish)=>{
@@ -43,49 +55,63 @@ class Inventory extends React.Component {
   }
 
   loadSampleDishes=()=>{
-    const { bulkUpload } = this.props
-    console.log(sampleDishes);
-    bulkUpload(sampleDishes)
-    // this.setState({
-    //   dishes: sampleDishes
-    // })
+    this.props.bulkUpload(sampleDishes)
   }
 
   render() {
-    console.log(this.props)
+    console.log(this.props, this.state.dishes)
 
     return (
-    <div className="redux-in-restaurant">
-      <div className="menu" style={{flex: 2}}>
+    // <div className="redux-in-restaurant">
+      <div className="menu">
         <div className="inventory">
           <h2>Inventory</h2>
-          <Link to="/store"><h3>GO TO ORDER</h3></Link>
+
+
           {Object.keys(this.state.dishes)
             .map(key => <EditDishForm 
-                            key={key} index={key} dish={this.state.dishes[key]} updateDish={this.updateDish} />)}
-          <AddDishForm addDish={this.addDish}/>
+                            key={key} 
+                            index={key} 
+                            dish={this.state.dishes[key]} 
+                            updateDish={this.updateDish} />)}
+
+
+
+          <AddDishForm 
+            addDish={this.addDish}
+            />
           
           <button onClick={this.loadSampleDishes}>Load Sample Dishes</button>
           
-          <button> <Link to="/inventory/analytics">show Analytics</Link></button>
+          {/* <button> <Link to="/inventory/analytics">show Analytics</Link></button> */}
+          
+          {/* <h4 style={{textAlign: 'right'}}><Link to="/store">GO TO ORDER</Link></h4> */}
+          
         </div>
-      </div>
-      
-      <Switch>
+            
+      {/* <Switch>
         <Route path="/inventory/analytics" component={InventoryAnalytics} />
-      </Switch>
+      </Switch> */}
       </div>
+  
+  
+      // </div>
     );
   }
 }
+
 function mapStateToProps(store){
   return { inventory: store.inventory}
   }
   
   function mapDispatchToProps(dispatch){
-    return bindActionCreators({bulkUpload}, dispatch)
+    return bindActionCreators({ bulkUpload, addItem }, dispatch)
   }
   
 export default connect(mapStateToProps, mapDispatchToProps)(Inventory);
   
+Inventory.propTypes = {
+  inventry: PropTypes.object,
+  bulkUpload: PropTypes.func
+}
 

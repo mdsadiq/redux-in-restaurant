@@ -38,7 +38,7 @@ const dishes = {
 
   dish6: {
     name: "Mac and Cheese",
-    image: "/images/macncheese.jpg",
+    image: "/images/macncheese.jpeg",
     desc:
       "Mac and Cheese!",
     price: 19500,
@@ -55,9 +55,8 @@ const dishes = {
 
   dish8: {
     name: "Pizza",
-    image: "/images/pizza.jpg",
-    desc:
-      "Cole slaw",
+    image: "/images/pizza2.png",
+    desc: "Pizza",
     price: 4250,
     status: "available"
   },

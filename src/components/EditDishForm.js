@@ -8,6 +8,7 @@ class EditDishForm extends React.Component {
     const updatedDish = {
       ...this.props.dish,
     [event.currentTarget.name]: event.currentTarget.value};
+    
     this.props.updateDish(this.props.index, updatedDish);
   }
   render() {

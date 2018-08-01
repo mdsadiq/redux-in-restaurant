@@ -131,7 +131,7 @@ header.top h3:after {
 }
 
 .redux-in-restaurant > * {
-	flex: 1 4 auto;
+	flex: 1 0 auto;
 	padding: 2rem;
 	border: 1rem double #1a1a1a;
 	position: relative;
@@ -155,8 +155,9 @@ header.top h3:after {
 }
 
 .redux-in-restaurant > *:last-child {
-	flex-shrink: 1;
-	flex-basis: 50%;
+	flex: 1 1 auto;
+	/* flex-shrink: 1; */
+	/* flex-basis: 50%; */
 	/* transform: translateX(-50%) rotateY(10deg) translateX(50%) scale(1.08) translateX(24px); */
 }
 

@@ -1,9 +1,10 @@
 {
   "name": "cotd",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "private": true,
   "devDependencies": {
     "concurrently": "3.5.1",
+    "jest": "^23.4.1",
     "react-scripts": "1.1.1"
   },
   "dependencies": {

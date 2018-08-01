@@ -10,7 +10,7 @@ import { render } from 'react-dom';
 
 import RestoApp from './components/index';
 
-import './css1/style.css';
+import './css/style.css';
 
 render(<RestoApp />, document.getElementById('main'));
 

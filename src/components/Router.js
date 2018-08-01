@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import StorePicker from './StorePicker';
 import App from './App';
 import NotFound from './NotFound';
@@ -11,7 +11,8 @@ import InventoryAnalytics from './Analytics';
 const Router = () => (
   <BrowserRouter>
     <Switch>
-      <Route exact path="/" component={StorePicker} />
+      {/* <Route exact path="/" component={StorePicker} /> */}
+      <Redirect exact from='/' to='/store'/>
       <Route path="/store/" component={App} />
       <Route path="/inventory"  component={Inventory} /> 
       <Route path="/testapi"  component={TestAPI} />
